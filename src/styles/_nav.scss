@@ -1,0 +1,72 @@
+/* UTILITIES
+------------------------------------*/
+.active {
+  background: rgba($white, 0.2);
+  transform: scaleX(1);
+  color: lighten($green, 10%) !important;
+}
+
+/*---------------------------------*/
+.nav {
+  font-size: $fs-app-header;
+  text-align: center;
+  // overflow-x: auto;
+  // overflow-y: hidden;
+  // &::-webkit-scrollbar {
+  //   display: none;
+  // }
+  &__list {
+    // overflow: visible;
+    display: grid;
+    grid-auto-flow: column;
+    align-items: flex-start;
+    margin-block-end: 0.81rem;
+  }
+  &__item {
+    justify-self: center;
+    &:last-child {
+      justify-self: flex-end;
+      background: $green;
+      inline-size: 2em;
+      border-radius: 7px;
+      > a {
+        padding: 0;
+        padding-block-start: 0.4em;
+        padding-block-end: 0.3em;
+        &::after {
+          content: none;
+        }
+      }
+      & > a:focus,
+      a:hover {
+        color: $white;
+      }
+    }
+    > a {
+      position: relative;
+      display: inline-block;
+      inline-size: 100%;
+      padding: 0.5em;
+      color: rgba($white, 0.8);
+      @include transition-ease;
+      &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        transform: scaleX(0);
+        @include transition-ease;
+      }
+      &:hover::after,
+      &:focus::after {
+        @extend .active;
+      }
+      &:hover,
+      &:focus {
+        color: lighten($green, 10%);
+      }
+    }
+  }
+}

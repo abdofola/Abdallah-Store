@@ -1,0 +1,37 @@
+.card {
+  display: grid;
+  gap: 2em;
+
+  &__content {
+    display: grid;
+    gap: 2em;
+
+    div:first-child {
+      box-shadow: 0 0 10px 5px;
+      margin-top: 1em;
+    }
+    p {
+      line-height: 1.2;
+      text-align: justify;
+    }
+  }
+  &__footer {
+    justify-self: center;
+    color: $red;
+    font-size: 1.2em;
+    font-weight: 500;
+    display: grid;
+    grid-auto-flow: row;
+    gap: 0.5em;
+    .price {
+      color: $black;
+    }
+    button {
+      border: none;
+      block-size: 2em;
+      padding-block-end: 0.09em;
+      color: $white;
+      background: $red;
+    }
+  }
+}

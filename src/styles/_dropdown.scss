@@ -1,0 +1,65 @@
+.menu-container {
+  position: relative;
+  inline-size: 100%;
+  font-size: $fs-app-header;
+
+  @media screen and(min-width:600px) {
+    & {
+      inline-size: initial;
+    }
+  }
+  .menu-trigger {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    inline-size: 100%;
+    background: $white;
+    border: none;
+    border-radius: 90px;
+    cursor: pointer;
+    padding: 0.25em 0.375em;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    vertical-align: middle;
+    transition: box-shadow 0.4s ease;
+    span {
+      font-weight: 500;
+      vertical-align: middle;
+      margin: 0 0.3em;
+    }
+    svg {
+      @include transition-ease;
+    }
+  }
+
+  .menu {
+    background: #ffffff;
+    border-radius: 8px;
+    position: absolute;
+    top: 2em;
+    left: 0;
+    z-index: 2;
+    width: 100%;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
+
+    li {
+      // border-bottom: 1px solid #dddddd;
+
+      a {
+        text-decoration: none;
+        color: #333333;
+        padding: 0.7em 0.7em;
+        display: block;
+      }
+    }
+
+    &.opened {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+  }
+}

@@ -1,0 +1,48 @@
+
+
+.search {
+  position: relative;
+  background: $white;
+  border-radius: 40px;
+  .border-input {
+    border: none;
+    outline: none;
+  }
+
+  &__btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: $fs-app-header;
+    text-decoration: none;
+    color: $white;
+    background: $green;
+    cursor: pointer;
+    inline-size: 2em;
+    block-size: 100%; 
+    border-radius: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @extend .border-input;
+    &:focus {
+      box-shadow: 0 0 4pt 2pt darken($white, 20%);
+    }
+  }
+
+  &__txt {
+    padding-inline-start: 10%;
+    inline-size: 100%;
+    background: none;
+    font-size: $fs-app-header;
+    line-height: 2em;
+    @extend .border-input;
+    &:focus {
+      border-radius: 40px;
+      box-shadow: 0 0 3pt 2pt lighten($green, 15%);
+    }
+    &::-webkit-input-placeholder {
+      opacity: 0.7;
+    }
+  }
+}

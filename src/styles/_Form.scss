@@ -1,0 +1,74 @@
+.form {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  font-family: "Montserrat", sans-serif;
+  label {
+    &::before {
+      content: attr(type);
+      display: block;
+      margin: 28px 0 0;
+    }
+    // font-size: 14px;
+    // color: $white;
+    input {
+      width: 100%;
+      margin-block-end: 0.3em;
+      padding: 10px;
+      background: none;
+      outline: none;
+      resize: none;
+      font-size: 1em;
+      border: 0;
+      transition: all 0.3s;
+      border-bottom: 1.5px solid #bebed2;
+      &::-webkit-input-placeholder {
+        color: lighten($black, 30%);
+        overflow: visible;
+        // white-space: pre-wrap;
+        // line-height: 1;
+      }
+      &:focus {
+        border-bottom: 1px solid $white;
+      }
+    }
+    textarea {
+      @extend input;
+      font-family: inherit;
+    }
+    span {
+      color: lighten($red, 15%);
+    }
+  }
+  button {
+    block-size: 2em;
+    margin-block-start: 2em;
+    // padding: 0.4em 0;
+    border: 1px solid $green;
+    color: $white;
+    background: rgba($green, 0.8);
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    &:hover {
+      background: #78788c;
+      color: $white;
+    }
+  }
+  div {
+    position: absolute;
+    bottom: -4.5em;
+    right: 0em;
+    background: #50505a;
+    color: #fff;
+    width: 100%;
+    padding: 16px 4px 16px 0;
+    border-radius: 6px;
+    font-size: 13px;
+    box-shadow: 10px 10px 40px -14px #000;
+    span {
+      margin: 0 5px 0 15px;
+    }
+  }
+}
