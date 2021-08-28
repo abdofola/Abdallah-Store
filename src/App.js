@@ -57,6 +57,7 @@ function App() {
     return thresholds;
   };
 
+  // copose this into useMemo hook
   const showCaseStyle = {
     marginTop: `${size?.bottom + 20}px`,
   };
