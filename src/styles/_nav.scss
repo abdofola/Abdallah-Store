@@ -10,13 +10,7 @@
 .nav {
   font-size: $fs-app-header;
   text-align: center;
-  // overflow-x: auto;
-  // overflow-y: hidden;
-  // &::-webkit-scrollbar {
-  //   display: none;
-  // }
   &__list {
-    // overflow: visible;
     display: grid;
     grid-auto-flow: column;
     align-items: flex-start;
@@ -37,7 +31,7 @@
           content: none;
         }
       }
-      & > a:focus,
+      & > a:focus,  
       a:hover {
         color: $white;
       }

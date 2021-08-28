@@ -1,22 +1,19 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useState } from "react";
 
-function Nav({ intersecting }) {
-  const home = useRef(null);
-  const about = useRef(null);
-  const contact = useRef(null);
+function Nav({ intersectings }) {
+  const [focus, setFocus] = useState(false);
 
   useEffect(() => {
-    const [homeRef, contactRef, aboutRef] = intersecting;
-    homeRef ? home.current.focus() : home.current.blur();
-    contactRef ? about.current.focus() : about.current.blur();
-    aboutRef ? contact.current.focus() : contact.current.blur();
-  },[intersecting]);
+    intersectings.forEach((intersecting) => {
+      intersecting && setFocus(false);
+    });
+  }, [focus, intersectings]);
+
+  const [homeRef, aboutRef, contactRef] = intersectings;
 
   function handleClick(e) {
-    [home, about, contact].forEach((elem) => {
-      console.log(elem.current.blur())
-    });
-    e.target.focus();
+    console.log(focus);
+    setFocus(true);
   }
 
   return (
@@ -24,8 +21,7 @@ function Nav({ intersecting }) {
       <ul className="nav__list">
         <li className="nav__item">
           <a
-            ref={home}
-            className="nav__link"
+            className={`nav__link ${homeRef || focus ? "active" : ""}`}
             href="#home"
             onClick={(e) => handleClick(e)}
           >
@@ -34,8 +30,7 @@ function Nav({ intersecting }) {
         </li>
         <li className="nav__item">
           <a
-            ref={about}
-            className="nav__link"
+            className={`nav__link ${(aboutRef && !contactRef) || focus ? "active" : ""}`}
             href="#about"
             onClick={(e) => handleClick(e)}
           >
@@ -44,8 +39,7 @@ function Nav({ intersecting }) {
         </li>
         <li className="nav__item">
           <a
-            ref={contact}
-            className="nav__link"
+            className={`nav__link ${contactRef || focus ? "active" : ""}`}
             href="#contact"
             onClick={(e) => handleClick(e)}
           >

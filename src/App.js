@@ -18,7 +18,7 @@ import useIntersectionObserver from "@react-hook/intersection-observer";
 const options = {
   root: null,
   rootMargin: '0px',
-  threshold: 0.5
+  threshold: 0.75
 }
 
 function App() {
@@ -100,7 +100,7 @@ function App() {
             </a>
           </div>
           <div className="header__right">
-            <Nav intersecting={[homeIntersect, aboutIntersect, contactIntersect]} />
+            <Nav intersectings={[homeIntersect, aboutIntersect, contactIntersect]} />
             <Search />
           </div>
         </div>
