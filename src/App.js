@@ -18,7 +18,7 @@ import useIntersectionObserver from "@react-hook/intersection-observer";
 const options = {
   root: null,
   rootMargin: "0px",
-  threshold: 0.75,
+  threshold: 0.76,
 };
 
 function App() {
