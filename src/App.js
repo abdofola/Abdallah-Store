@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import Nav from "./components/Nav";
 import Search from "./components/Search";
 import Slider, { CardSlider } from "./components/Slider";
@@ -17,9 +17,9 @@ import useIntersectionObserver from "@react-hook/intersection-observer";
 
 const options = {
   root: null,
-  rootMargin: '0px',
-  threshold: 0.75
-}
+  rootMargin: "0px",
+  threshold: 0.75,
+};
 
 function App() {
   const [min, setMin] = useState(false);
@@ -27,11 +27,21 @@ function App() {
   const contactRef = useRef(null);
   const headerRef = useRef(null);
   const showCaseRef = useRef(null);
-  const { isIntersecting : contactIntersect } = useIntersectionObserver(contactRef, options);
-  const { isIntersecting : homeIntersect } = useIntersectionObserver(showCaseRef, options);
-  const { isIntersecting : aboutIntersect } = useIntersectionObserver(aboutRef, options);
+  const { isIntersecting: contactIntersect } = useIntersectionObserver(
+    contactRef,
+    options
+  );
+  const { isIntersecting: homeIntersect } = useIntersectionObserver(
+    showCaseRef,
+    options
+  );
+  const { isIntersecting: aboutIntersect } = useIntersectionObserver(
+    aboutRef,
+    options
+  );
   const { width } = useWindowSize();
   const size = useSize(headerRef);
+  const { bottom } = useMemo(() => ({ bottom: size?.bottom }), [size?.bottom]);
 
   // const socialCallBack = (entries) => {
   //   const [entry] = entries;
@@ -55,11 +65,6 @@ function App() {
 
     thresholds.push(0);
     return thresholds;
-  };
-
-  // copose this into useMemo hook
-  const showCaseStyle = {
-    marginTop: `${size?.bottom + 20}px`,
   };
 
   useEffect(() => {
@@ -89,7 +94,7 @@ function App() {
     showcaseObserver.observe(showCase);
 
     return () => showcaseObserver.unobserve(showCase);
-  }, [showCaseStyle]);
+  }, []);
 
   return (
     <div className="App">
@@ -101,7 +106,9 @@ function App() {
             </a>
           </div>
           <div className="header__right">
-            <Nav intersectings={[homeIntersect, aboutIntersect, contactIntersect]} />
+            <Nav
+              intersectings={[homeIntersect, aboutIntersect, contactIntersect]}
+            />
             <Search />
           </div>
         </div>
@@ -114,7 +121,7 @@ function App() {
           ref={showCaseRef}
           id="home"
           className="showCase"
-          style={showCaseStyle}
+          style={{ marginBlockStart: `${bottom + 20}px` }}
         >
           <Slider sliders={data.sliders} />
         </div>
