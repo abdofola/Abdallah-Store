@@ -31,7 +31,7 @@
           content: none;
         }
       }
-      & > a:focus,  
+      & > a:focus,
       a:hover {
         color: $white;
       }
@@ -60,6 +60,16 @@
       &:hover,
       &:focus {
         color: lighten($green, 10%);
+      }
+      @media (hover: none) {
+        &:hover::after{
+          background: rgba($white, 0.2);
+          transform: scaleX(1);
+          color: lighten($green, 10%);
+        }
+        &:hover{
+          color:  lighten($green, 10%);
+        }
       }
     }
   }

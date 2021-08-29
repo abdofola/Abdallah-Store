@@ -12,8 +12,8 @@ function Nav({ intersectings }) {
   const [homeRef, aboutRef, contactRef] = intersectings;
 
   function handleClick(e) {
-    console.log(focus);
-    setFocus(true);
+    // console.log(focus);
+    // setFocus(true);
   }
 
   return (

@@ -46,8 +46,8 @@ function Form() {
           placeholder="Enter Mobile number"
           {...register("phone", {
             required: "you forgot your phone number Sr.",
-            minLength: { value: 6, message: "less than 6 digits" },
-            maxLength: { value: 12, message: "grater than 12 digits" },
+            minLength: { value: 10, message: "less than 6 digits" },
+            maxLength: { value: 14, message: "grater than 12 digits" },
             pattern: {
               value: numRegex,
               message: "please enter a valid phone Sr.",

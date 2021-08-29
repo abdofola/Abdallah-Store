@@ -1,13 +1,27 @@
 import { FaFacebookF, FaWhatsapp } from "react-icons/fa";
-// import "./social.scss";
+import useIntersectionObserver from "@react-hook/intersection-observer";
+import { useMemo, useRef } from "react";
 
 function Social() {
+  const ref = useRef(null);
+  const { isIntersecting } = useIntersectionObserver(ref);
+
+  const visible = useMemo(() => isIntersecting, [isIntersecting]);
+
   return (
     <>
-      <a href="#!" className="socials__social">
+      <a
+        ref={ref}
+        href="#!"
+        className={`socials__social ${visible ? "visible" : ""}`}
+      >
         <FaFacebookF />
       </a>
-      <a href="#!" className="socials__social">
+      <a
+        ref={ref}
+        href="#!"
+        className={`socials__social ${visible ? "visible" : ""}`}
+      >
         <FaWhatsapp />
       </a>
     </>

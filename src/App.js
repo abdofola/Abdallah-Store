@@ -5,7 +5,6 @@ import Slider, { CardSlider } from "./components/Slider";
 import Social from "./components/Social";
 import logo from "./logos/logo_trans.svg";
 import imgLogo from "./logos/logo_colored.svg";
-import { LoremIpsum } from "react-lorem-ipsum";
 import Grid from "./components/Grid";
 import DropdownMenu from "./components/DropdownMenu";
 
@@ -15,86 +14,39 @@ import { useWindowSize } from "./custom_hooks/useWindowSize";
 import { useSize } from "./custom_hooks/useSize";
 import useIntersectionObserver from "@react-hook/intersection-observer";
 
-const options = {
-  root: null,
-  rootMargin: "0px",
-  threshold: 0.76,
-};
-
 function App() {
   const [min, setMin] = useState(false);
   const aboutRef = useRef(null);
   const contactRef = useRef(null);
   const headerRef = useRef(null);
   const showCaseRef = useRef(null);
-  const { isIntersecting: contactIntersect } = useIntersectionObserver(
-    contactRef,
-    options
-  );
-  const { isIntersecting: homeIntersect } = useIntersectionObserver(
-    showCaseRef,
-    options
-  );
+  const options = {
+    root: null,
+    rootMargin: "0px",
+    threshold: 1,
+  };
+
+  // Custom hooks
+  const { isIntersecting: homeIntersect, intersectionRatio: homeRatio } =
+    useIntersectionObserver(showCaseRef, options);
   const { isIntersecting: aboutIntersect } = useIntersectionObserver(
     aboutRef,
     options
   );
+  const { isIntersecting: contactIntersect } = useIntersectionObserver(
+    contactRef,
+    options
+  );
+
   const { width } = useWindowSize();
   const size = useSize(headerRef);
+
   const { bottom } = useMemo(() => ({ bottom: size?.bottom }), [size?.bottom]);
-
-  // const socialCallBack = (entries) => {
-  //   const [entry] = entries;
-  //   setVisible(entry.isIntersecting);
-  // };
-
-  const showcaseCallBack = (entries) => {
-    const [entry] = entries;
-    entry.intersectionRatio < 0.7 ? setMin(true) : setMin(false);
-  };
-
-  // Threshold builder
-  const buildThresholdList = () => {
-    let thresholds = [];
-    let numSteps = 20;
-
-    for (let i = 1.0; i <= numSteps; i++) {
-      let ratio = i / numSteps;
-      thresholds.push(ratio);
-    }
-
-    thresholds.push(0);
-    return thresholds;
-  };
+  const ratio = useMemo(() => homeRatio, [homeRatio]);
 
   useEffect(() => {
-    // const socialOptions = {
-    //   root: null,
-    //   rootMargin: "0px",
-    //   threshold: 1,
-    // };
-    const showcaseOptions = {
-      root: null,
-      rootMargin: "0px",
-      threshold: buildThresholdList(),
-    };
-
-    // const socials = socialRef.current;
-    const showCase = showCaseRef.current;
-
-    // const socialObserver = new IntersectionObserver(
-    //   socialCallBack,
-    //   socialOptions
-    // );
-    const showcaseObserver = new IntersectionObserver(
-      showcaseCallBack,
-      showcaseOptions
-    );
-    // socialObserver.observe(socials);
-    showcaseObserver.observe(showCase);
-
-    return () => showcaseObserver.unobserve(showCase);
-  }, []);
+    ratio < 1 ? setMin(true) : setMin(false);
+  }, [ratio]);
 
   return (
     <div className="App">
@@ -155,7 +107,13 @@ function App() {
           <div className="about__wrapper">
             <img className="about__img" src={imgLogo} alt="company img" />
             <div className="about__info">
-              <LoremIpsum p={1} />
+              <p>
+                Lorem ipsum is placeholder text commonly used in the graphic,
+                print , and publishing industries for previewing layouts and
+                Lorem ipsum is placeholder text commonly used in the graphic,
+                print , and publishing industries for previewing layouts and
+                visual mockups. visual mockups.{" "}
+              </p>
             </div>
           </div>
         </section>
@@ -164,6 +122,10 @@ function App() {
         <section ref={contactRef} id="contact" className="contact">
           <div className="contact__wrapper">
             <h2>Contact me</h2>
+            <p>
+              Feel free to contact me directly by sending a message in what's
+              app or via facebook. choose what you're comfortable with.
+            </p>
             <div className="socials">
               <Social />
             </div>

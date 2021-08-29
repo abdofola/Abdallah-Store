@@ -259,13 +259,23 @@
 ------------------------------------*/
   .contact {
     &__wrapper {
-      @extend .about__wrapper;
-      & h2 {
-        color: lighten($green, 10%);
-        letter-spacing: 3px;
-        text-shadow: 1px 1px darken($body-bg, 30%),
-          2px 2px darken($body-bg, 20%), 3px 3px darken($body-bg, 10%),
-          4px 4px lighten($green, 25%);
+      @extend .wrapper;
+      display: grid;
+      justify-items: center;
+      gap: 1em;
+      margin: 2em auto 2em;
+      color: lighten($green, 10%);
+      h2 {
+        background-image: linear-gradient(90deg, lighten($red, 20%), $green);
+        background-clip: text;
+        color: transparent;
+        letter-spacing: 0.075em;
+        font-weight: 900;
+      }
+      p {
+        line-height: 1.5;
+        text-align: justify;
+        text-align-last: center;
       }
     }
   }
@@ -278,9 +288,9 @@
     padding-block-end: 2rem;
     background: $red;
     color: rgba($white, 0.6);
-  p {
-    text-align: center
-  }
+    p {
+      text-align: center;
+    }
   }
 }
 
