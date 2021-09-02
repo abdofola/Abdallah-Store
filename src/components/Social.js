@@ -1,36 +1,34 @@
 import { FaFacebookF, FaWhatsapp } from "react-icons/fa";
-import { useEffect, useState } from "react";
-import Zoom from "react-reveal/Zoom";
 // import useIntersectionObserver from "@react-hook/intersection-observer";
-// import { useOnscreen } from "../custom_hooks/useOnscreen";
+import React, { useEffect, useRef, useState } from "react";
+import { useOnscreen } from "../custom_hooks/useOnscreen";
 
 function Social() {
-  const [animate, setAnimate] = useState(false);
-  // const ref = useRef(null);
-  // const ref = useRef(null);
-  // const { isIntersecting } = useIntersectionObserver(ref, {useMutationObserver: false});
-  // const isIntersecting = useOnscreen(ref);
-  // const visible = useMemo(() => isIntersecting, [isIntersecting]);
-  // console.log(isIntersecting)
+  const ref = useRef(null);
+  const { isIntersecting } = useOnscreen(ref);
+  const [intersectCount, setIntersecCount] = useState(0);
+  const firstAppearance = intersectCount > 0;
 
   useEffect(() => {
-    setTimeout(() => {
-      setAnimate(true);
-    }, 3000);
-  });
+    isIntersecting && setIntersecCount(1);
+  }, [intersectCount, isIntersecting]);
 
+ 
   return (
     <>
-      <Zoom>
-        <a href="#!" className={`socials__social `}>
-          <FaFacebookF />
-        </a>
-      </Zoom>
-      <Zoom when={animate}>
-        <a href="#!" className={`socials__social `}>
-          <FaWhatsapp />
-        </a>
-      </Zoom>
+      <a
+        ref={ref}
+        href="#!"
+        className={`socials__social ${firstAppearance && "visible"}`}
+      >
+        <FaFacebookF />
+      </a>
+      <a
+        href="https://wa.me/249908608183"
+        className={`socials__social ${firstAppearance && "visible"}`}
+      >
+        <FaWhatsapp />
+      </a>
     </>
   );
 }
