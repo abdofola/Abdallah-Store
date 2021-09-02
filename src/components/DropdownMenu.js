@@ -4,6 +4,7 @@ import { FaAngleDown } from "react-icons/fa";
 function DropdownMenu({ min }) {
   const dropDownRef = useRef(null);
   const [isActive, setIsActive] = useState(false);
+  const categories = ["bicycles", "heaters"];
 
   useEffect(() => {
     if (isActive) {
@@ -34,10 +35,11 @@ function DropdownMenu({ min }) {
         className={`menu ${isActive ? "opened" : "closed"}`}
       >
         <li>
-          <a href="#bicycles">Bicycle</a>
-        </li>
-        <li>
-          <a href="#heaters">Heaters</a>
+          {categories.map((cat, id) => (
+            <a key={id} href={`#${cat}`}>
+              {cat}
+            </a>
+          ))}
         </li>
       </ul>
     </div>

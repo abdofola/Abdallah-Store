@@ -3,26 +3,25 @@ import { useEffect, useState } from "react";
 function useOnscreen(ref, options = {}) {
   // state for checking elem visibility
   const [isIntersecting, setIntersecting] = useState(false);
+  const [ratio, setRatio] = useState(null);
 
-  const callback = ([entry], observer) => {
+  const callback = ([entry]) => {
     // Update the state when callback fires.
     setIntersecting(entry.isIntersecting);
-    observer.unobserve(entry.target);
-
+    setRatio (entry.intersectionRatio)
   };
-
+  
   useEffect(() => {
     const observer = new IntersectionObserver(callback, options);
-    const elem = ref.current;
-    
-    // start observing if the element is nodeElement
-    elem && observer.observe(elem);
-    
-    // cleanup
-    // return () => ref && observer.unobserve(elem);
-  }, [options, ref]);
+    const elem = ref?.current;
 
-  return isIntersecting;
+    observer.observe(elem);
+
+    // cleanup
+    return () => observer.unobserve(elem);
+  },[options, ref]);
+
+  return {isIntersecting, ratio};
 }
 
 export { useOnscreen };

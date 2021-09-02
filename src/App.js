@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef, useMemo } from "react";
+// import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
 import Nav from "./components/Nav";
 import Search from "./components/Search";
 import Slider, { CardSlider } from "./components/Slider";
@@ -7,7 +9,6 @@ import logo from "./logos/logo_trans.svg";
 import imgLogo from "./logos/logo_colored.svg";
 import Grid from "./components/Grid";
 import DropdownMenu from "./components/DropdownMenu";
-import Slide from "react-reveal/Zoom";
 
 // import data.json
 import data from "./data.json";
@@ -16,6 +17,7 @@ import data from "./data.json";
 import { useWindowSize } from "./custom_hooks/useWindowSize";
 import { useSize } from "./custom_hooks/useSize";
 import useIntersectionObserver from "@react-hook/intersection-observer";
+import Footer from "./components/Footer";
 
 function App() {
   const [min, setMin] = useState(false);
@@ -81,7 +83,6 @@ function App() {
           <Slider sliders={data.sliders} />
         </div>
         {/* .showCase end */}
-
         <section id="bicycles" className="cardWrapper">
           <div className="wrapper">
             <h2>Bicycles</h2>
@@ -108,20 +109,16 @@ function App() {
 
         <section ref={aboutRef} id="about" className="about">
           <div className="about__wrapper">
-            <Slide left>
-              <img className="about__img" src={imgLogo} alt="company img" />
-            </Slide>
-            <Slide right >
-              <div className="about__info">
-                <p>
-                  Lorem ipsum is placeholder text commonly used in the graphic,
-                  print , and publishing industries for previewing layouts and
-                  Lorem ipsum is placeholder text commonly used in the graphic,
-                  print , and publishing industries for previewing layouts and
-                  visual mockups. visual mockups.{" "}
-                </p>
-              </div>
-            </Slide>
+            <img className="about__img" src={imgLogo} alt="company img" />
+            <div className="about__info">
+              <p>
+                Lorem ipsum is placeholder text commonly used in the graphic,
+                print , and publishing industries for previewing layouts and
+                Lorem ipsum is placeholder text commonly used in the graphic,
+                print , and publishing industries for previewing layouts and
+                visual mockups. visual mockups.{" "}
+              </p>
+            </div>
           </div>
         </section>
         {/* .about end */}
@@ -140,9 +137,7 @@ function App() {
         </section>
         {/* .contact end */}
       </main>
-      <footer className="footer">
-        <p>Designed by fola | momo &copy; {new Date().getFullYear()}</p>
-      </footer>
+      <Footer />
     </div>
   );
 }
