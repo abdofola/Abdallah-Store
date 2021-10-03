@@ -8,35 +8,19 @@
 
 /*---------------------------------*/
 .nav {
-  font-size: $fs-app-header;
+  // font-size: $fs-app-header;
   text-align: center;
   &__list {
     display: grid;
     grid-auto-flow: column;
-    align-items: flex-start;
     margin-block-end: 0.81rem;
+    text-transform: uppercase;
   }
   &__item {
     justify-self: center;
-    &:last-child {
-      justify-self: flex-end;
-      background: $green;
-      inline-size: 2em;
-      border-radius: 7px;
-      > a {
-        padding: 0;
-        padding-block-start: 0.4em;
-        padding-block-end: 0.3em;
-        &::after {
-          content: none;
-        }
-      }
-      & > a:focus,
-      a:hover {
-        color: $white;
-      }
-    }
-    > a {
+    align-self: flex-end;
+    
+    > .nav__link {
       position: relative;
       display: inline-block;
       inline-size: 100%;
@@ -61,6 +45,7 @@
       &:focus {
         color: lighten($green, 10%);
       }
+      // disable hover effect on mobile view
       @media (hover: none) {
         &:hover::after{
           background: rgba($white, 0.2);
@@ -71,6 +56,12 @@
           color:  lighten($green, 10%);
         }
       }
+    }
+    button {
+      background: transparent;
+      cursor: pointer;
+      border: none;
+      font-size: inherit;
     }
   }
 }

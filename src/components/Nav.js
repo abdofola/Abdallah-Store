@@ -1,46 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { Link } from "react-router-dom";
 
-function Nav({ intersectings }) {
-  const [focus, setFocus] = useState(false);
-
-  useEffect(() => {
-    intersectings.forEach((intersecting) => {
-      intersecting && setFocus(false);
-    });
-  }, [focus, intersectings]);
-
-  const [homeRef, aboutRef, contactRef] = intersectings;
+function Nav() {
 
   return (
     <nav className="nav">
       <ul className="nav__list">
         <li className="nav__item">
-          <a
-            className={`nav__link ${homeRef || focus ? "active" : ""}`}
-            href="/"
-          >
+          <Link to="/" className={`nav__link `}>
             Home
-          </a>
+          </Link>
         </li>
         <li className="nav__item">
-          <a
-            className={`nav__link ${
-              (aboutRef && !contactRef) || focus ? "active" : ""
-            }`}
-            href="#about"
-          >
-            About
-          </a>
-        </li>
-        <li className="nav__item">
-          <a
-            className={`nav__link ${contactRef || focus ? "active" : ""}`}
-            href="/contact"
-          >
+          <Link to="/contact" className={`nav__link`}>
             Contact
-          </a>
+          </Link>
         </li>
-        <li className="nav__item lang">
+        <li className=" lang">
           <a href="#!">EN</a>
         </li>
       </ul>

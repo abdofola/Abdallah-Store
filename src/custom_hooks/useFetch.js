@@ -25,7 +25,7 @@ function useFetch(uri) {
             console.log("fetch aborted");
           } else {
             setIsPending(false);
-            setError(err);
+            setError(err.message);
           }
         });
     }, 1000);

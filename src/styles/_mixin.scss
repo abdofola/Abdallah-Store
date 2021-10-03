@@ -13,10 +13,114 @@
 
 @mixin animate-delay($childNumber) {
   @for $delay from 1 through $childNumber {
-   &:nth-child(#{$delay}).visible{
-    opacity: 1;
-    transform: scale(1) translate(0);
-     transition-delay: $delay * 0.25s;
-   }
+    &:nth-child(#{$delay}).visible {
+      opacity: 1;
+      transform: scale(1) translate(0) rotate(0);
+      transition-delay: $delay * 0.1s;
+    }
+  }
+}
+
+@mixin fadeIn {
+  @keyframes fadeIn {
+    from {
+      opacity: 0.5;
+      transform: translate(-20%, 0) rotate(-15deg);
+    }
+    to {
+      opacity: 1;
+      transform: translate(0px, 0px) rotate(0deg);
+    }
+  }
+}
+@mixin fadeOut {
+  @keyframes fadeOut {
+    // from {
+    //   opacity: 1;
+    //   transform: translate(0px, 0px);
+    // }
+    // to {
+    //   transform: translate(-20%, 0);
+    //   opacity: 0;
+    // }
+  }
+}
+
+@mixin slideInBounce {
+  @keyframes slideInBounce {
+    0% {
+      opacity: 0;
+      transform: scale(1, 1) translateX(0);
+    }
+    10% {
+      transform: scale(1.1, 1);
+    }
+    30% {
+      opacity: 0;
+      transform: scale(0.5, 1) translateX(-100%);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.3, 1) translateX(0);
+    }
+    57% {
+      transform: scale(1.2, 1) translateX(10%);
+    }
+    64% {
+      transform: scale(1.1, 1) translateX(5%);
+    }
+    100% {
+      transform: scale(1, 1) translateX(0);
+    }
+  }
+}
+@mixin slideOutBounce {
+  @keyframes slideOutBounce {
+  }
+}
+
+@mixin underline($main, $secondary) {
+  & {
+    position: relative;
+    font-weight: 700;
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -30%;
+      width: 3em;
+      height: 0.1em;
+      background-color: $secondary;
+    }
+    &::after {
+      background-color: $main;
+      bottom: -42.5%;
+      width: 1em;
+      height: 0.4em;
+    }
+  }
+}
+
+@function strip-unit($value) {
+  @return $value / ($value * 0 + 1);
+}
+
+@mixin fluid-type($min-vw, $max-vw, $min-font-size, $max-font-size) {
+  $u1: unit($min-vw);
+  $u2: unit($max-vw);
+  $u3: unit($min-font-size);
+  $u4: unit($max-font-size);
+
+  @if $u1 == $u2 and $u1 == $u3 and $u1 == $u4 {
+    & {
+      font-size: $min-font-size;
+      @media screen and (min-width: $min-vw) {
+        font-size: calc(#{$min-font-size} + #{strip-unit($max-font-size - $min-font-size)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));
+      }
+      @media screen and (min-width: $max-vw) {
+        font-size: $max-font-size;
+      }
+    }
   }
 }

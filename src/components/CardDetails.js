@@ -1,4 +1,5 @@
 function CardDetails({ header, children, price, openForm }) {
+  // console.log('title:', header)
   return (
     <div className="card">
       <div className="card__content">{children}</div>
@@ -6,7 +7,7 @@ function CardDetails({ header, children, price, openForm }) {
         <span>
           Price: <span className="price">{price}</span>
         </span>
-        <button onClick={(e) => openForm(e, { title: header })}>Request</button>
+        <button onClick={(e) => openForm(e, {  name: header })}>Request</button>
       </div>
     </div>
   );

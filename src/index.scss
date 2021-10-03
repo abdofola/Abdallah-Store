@@ -1,6 +1,6 @@
 @import "./styles/variables";
-@import "./styles/config";
 @import "./styles/mixin";
+@import "./styles/config";
 @import "./styles/App";
 @import "./styles/search";
 @import "./styles/nav";
@@ -9,3 +9,69 @@
 @import "./styles/Modal";
 @import "./styles/Form";
 @import "./styles/CardDetails";
+@import "./styles/Contact";
+@import "./styles/Content";
+@import "./styles/ProductDetails";
+
+$red: hsl(0, 62%, 36%);
+$green: hsl(120, 28%, 44%);
+
+.loader {
+  position: absolute;
+  top: calc(50% - 4em);
+  left: calc(50% - 4em);
+  inline-size: 6em;
+  block-size: 6em;
+  transition: opacity 0.3s;
+  & div {
+    position: absolute;
+    inline-size: 100%;
+    block-size: 100%;
+    border: 10px solid transparent;
+    border-top-color: $red;
+    border-radius: 50%;
+    animation: rotate1st 1s linear infinite; 
+    &:last-child {
+      border: 10px solid transparent;
+      border-bottom-color: $green;
+      animation: rotate2nd 1s linear infinite;
+    }
+  }
+  &--hide {
+    opacity: 0;
+    display: none;
+  }
+  &--show {
+    opacity: 1;
+    display: initial;
+  }
+}
+
+@keyframes rotate1st {
+  0% {
+    transform: rotate(0deg);
+    border-width: 10px;
+  }
+  50% {
+    transform: rotate(180deg);
+    border-width: 1px;
+  }
+  100% {
+    transform: rotate(360deg);
+    border-width: 10px;
+  }
+}
+@keyframes rotate2nd {
+  0% {
+    transform: rotate(0deg);
+    border-width: 1px;
+  }
+  50% {
+    transform: rotate(180deg);
+    border-width: 10px;
+  }
+  100% {
+    transform: rotate(360deg);
+    border-width: 1px;
+  }
+}

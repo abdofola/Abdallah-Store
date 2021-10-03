@@ -9,13 +9,13 @@ function Modal({ show, close, title, children, form }) {
     const body = document.body;
     if (show) {
       body.style.overflow = "hidden";
-       modalRef.current.focus();
-    } else body.style.overflow = "unset";
+      modalRef.current.focus();
+    } else body.style.overflow = "initial";
   }, [show]);
 
   const child = (
     <>
-      {show ? (
+      {show && (
         <div className="modalContainer" onClick={() => close()}>
           <div
             ref={modalRef}
@@ -23,10 +23,10 @@ function Modal({ show, close, title, children, form }) {
             className="modal"
             onClick={(e) => e.stopPropagation()}
           >
-            <header className="modal_header">
-              <h2 className="modal_header-title">
+            <header className="modal__header">
+              <h3 className="modal__header-title">
                 {form ? `Request for ${title}` : title}
-              </h2>
+              </h3>
               <button className="close" onClick={() => close()}>
                 <BsXCircleFill />
               </button>
@@ -34,7 +34,7 @@ function Modal({ show, close, title, children, form }) {
             <main className="modal_content"> {children} </main>
           </div>
         </div>
-      ) : null}
+      )}
     </>
   );
 

@@ -8,5 +8,15 @@ $body-bg: hsl(120, 2%, 90%);
 
 /* FONTS
 ------------------------- */
-$fs-app-header: clamp(3vmin, 0.8rem, 4vmin);
-$fs-card: clamp(3vmin, 0.5rem, 4vmin);
+$min_width: 320px;
+$max_width: 1200px;
+$min_font: 16px;
+$max_font: 24px;
+$mod_1: 1.2; // mobile
+$mod_2: 1.5; // desktop
+$fs-header:clamp(0.8rem, calc(1vw + 0.3rem), 1rem);
+
+
+
+// $fs-app-header: clamp(3vmin, 0.8rem, 4vmin);
+// $fs-card: clamp(3vmin, 0.5rem, 4vmin);

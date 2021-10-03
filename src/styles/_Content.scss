@@ -1,0 +1,39 @@
+
+.content {
+  padding-bottom: 20vmin;
+  .title {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    text-align: center;
+    margin-bottom: 7vmin;
+    text-transform: capitalize;
+    h2 {
+      @include underline($red, $black);
+    }
+  }
+  &__filters {
+    display: flex;
+    justify-content: center;
+    margin-top: 12vmin;
+    & > * + * {
+      margin-inline-start: 2em;
+    }
+  }
+  &__filter {
+      border: none;
+      border-radius: 2em;
+      padding: 0.2em 1em 0.3em;
+      background-color: rgba($green, 0.5);
+      cursor: pointer;
+      @include transition-ease;
+      &.active {
+          background-color: $white;
+          border: 1px solid currentColor;
+      }
+
+      &:hover, &:focus {
+          opacity: 0.8;
+      }
+  }
+}
