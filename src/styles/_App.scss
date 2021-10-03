@@ -1,57 +1,53 @@
 /* UTILITIES
 ------------------------------------*/
 
-.wrapper {
-  max-inline-size: 850px;
-  inline-size: 85%;
+.container {
+  position: relative;
+  inline-size: calc(min(90%, 70.5rem));
   margin: 0 auto;
 }
-.reset-visibility {
+
+.hide-left {
   opacity: 0;
-  height: 0 !important;
-  visibility: hidden !important;
-  @include transition-ease;
+  transform: translateX(-100%);
 }
-.reset-dimensions {
-  margin: 0 !important;
-  padding: 0 !important;
-  border: 0 !important;
-  @include transition-ease;
-  transition-delay: 1s;
+
+.hide-right {
+  opacity: 0;
+  transform: translateX(100%);
 }
 
 /*-----------------------------------*/
 
 .App {
   .header {
-    position: fixed;
-    top: 0;
+    position: relative;
     inline-size: 100%;
-    background-color: $red;
-    font-size: calc(10px + 2vmin);
+    block-size: auto;
+    background-image: linear-gradient(
+      darken($green, 20%),
+      lighten($green, 15%)
+    );
     padding: 1em;
     color: $white;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    filter: drop-shadow(0 5px 5px $black);
-    z-index: 2;
+
     &__container {
+      align-self: flex-start;
       display: grid;
-      grid-template-columns: repeat(6, minmax(auto, 1fr));
-      margin-block-end: 1em;
-      border-block-end: 1px solid;
-      padding-block-end: 1em;
+      grid-template-columns: repeat(8, minmax(auto, 1fr));
       @include transition-ease;
     }
     &__left {
+      grid-column: span 2;
       a {
         display: flex;
         height: 100%;
       }
     }
     &__right {
+      font-size: $fs-header;
       position: relative;
-      grid-column: 3/-1;
+      grid-column: 4/9;
       display: flex;
       flex-direction: column;
       justify-content: space-around;
@@ -62,70 +58,53 @@
       min-block-size: 100%;
     }
 
-    &__cat {
-      display: flex;
-    }
-
-    @media screen and (min-width: 1100px) {
-      &__container {
-        grid-template-columns: repeat(6, minmax(auto, 100px)) !important;
+    @media screen and (min-width: 37.5em) {
+      &__left {
+        grid-column: span 1;
       }
       &__right {
-        grid-column: 7/8 !important;
-        justify-content: space-between !important;
-        ul {
-          block-size: 100% !important;
-        }
+        grid-column: 5/9;
       }
+    }
+    @media screen and (min-width: 50em) {
+      &__right {
+        grid-column: 6/9;
+      }
+    }
+
+    .waves {
+      align-self: flex-end;
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin-block-end: -1.5vw;
+      fill: $white;
     }
   }
 
   /* SWIPER JS STYLE
 ------------------------------------*/
-  // rgb(149, 35, 35) red
-  // rgb(81, 144, 81) green
 
   .cardWrapper {
-    background: linear-gradient(40deg, rgba($red, 0.3), rgba($green, 0.4));
-    margin-block-start: 10px;
-    margin-block-end: 10px;
-    padding-block-start: 1.5em;
-  }
+    padding-top: 1.5em;
 
-  .swiperFullSc {
-    position: relative;
-    inline-size: 100%;
-    height: 200px;
-    .swiper-slide {
+    .custom-shape-divider-bottom-1632582134 {
+      position: relative;
+      bottom: -5px;
       width: 100%;
-      height: 100%;
-      display: flex;
-      -webkit-box-pack: center;
-      -ms-flex-pack: center;
-      -webkit-justify-content: center;
-      justify-content: center;
-      -webkit-box-align: center;
-      -ms-flex-align: center;
-      -webkit-align-items: center;
-      align-items: center;
+      overflow: hidden;
+      svg {
+        fill: $white;
+      }
     }
-    h3 {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      inline-size: 60%;
-      font-size: $fs-card;
-      padding: 1em;
-      text-align: center;
-      text-transform: capitalize;
-      letter-spacing: 2px;
-      color: $white;
-      background: rgba($color: $red, $alpha: 0.4);
-      z-index: 10;
-      transform: translate(-50%, -50%);
-    }
-    .swiper-pagination-bullet-active {
-      background: $green;
+
+    /** For mobile devices **/
+    @media (max-width: 767px) {
+      .custom-shape-divider-bottom-1632582134 svg {
+        width: calc(122% + 1.3px);
+        height: 94px;
+      }
     }
   }
 
@@ -133,63 +112,99 @@
 ------------------------------------*/
   .products {
     inline-size: 100%;
-    padding-block-start: 1em;
-    padding-block-end: 1em;
-    background: transparent;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: center;
     flex-wrap: wrap;
     &__card {
-      background: $white;
-      position: relative;
-      flex: 0 0 200px;
-      margin-block-start: 0.5em;
-      padding-block-end: 0.5em;
+      & > * + * {
+        padding-inline-start: 0.65rem;
+      }
+      flex: 1 0 13.5rem;
       display: grid;
-      justify-items: center;
-      gap: 0.8em;
-      box-shadow: 0 0 5px;
+      grid-template-rows: 8.5rem auto auto;
+      max-inline-size: 16.625rem;
+      margin: 1rem;
+      background: $white;
+      border-radius: 5px;
+      overflow: hidden;
+      box-shadow: 1px 2px 3px rgba($black, 0.5), -1px -2px 3px rgba($black, 0.5);
+      transform: translateY(5em);
+      opacity: 0;
       @include transition-ease;
-      &:hover {
-        cursor: pointer;
-        transform: scale(1.1) translateY(-1em);
-        box-shadow: 3px 5px 5px 1px;
+      &.fade-in {
+        transition-delay: unset;
+        transform: translateY(0);
+        opacity: 1;
+      }
+      &:hover,
+      &:focus {
+        transition-delay: unset !important;
+        transform: scale(1.05) translateY(-0.65em);
+        box-shadow: 3px 6px 10px 1px;
       }
     }
     &__img {
-      height: 120px;
       overflow: hidden;
       img {
         @include transition-ease;
-        width: 100%;
-        height: 100%;
+        inline-size: 100%;
+        block-size: 100%;
+        object-fit: cover;
         &:hover {
-          transform: scale(1.2);
+          transform: scale(1.1);
         }
       }
     }
-    &__text {
-      width: 90%;
-      display: grid;
-      gap: 0.3em;
+    &__content {
+      h4 {
+        padding: 0.5em 0 0.25em;
+      }
       p {
-        color: darken($body-bg, 40%);
-        font-size: $fs-card;
+        max-inline-size: 97%;
+        font-size: clamp(0.9rem, calc(1vw + 0.35rem), 1.1rem);
+        color: lighten($black, 40%);
       }
     }
-    &__btn {
-      font-size: $fs-card;
-      > button {
-        outline: none;
-        border: none;
-        margin-block-start: 5px;
-        padding: 0.35em;
-        padding-inline-start: 0.5em;
-        padding-inline-end: 0.5em;
-        background-color: darken($body-bg, 10%);
-        color: lighten($red, 20%);
+    &__footer {
+      align-self: flex-end;
+      a {
+        position: relative;
+        display: inline-block;
+        font-size: 0.75rem;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        margin: 1em 0;
+        padding: 0.5em;
+        background-color: transparent;
+        color: $black;
+        text-transform: uppercase;
         cursor: pointer;
+        border: none;
+        z-index: 1;
+        @include transition-ease;
+        &::after {
+          content: "";
+          position: absolute;
+          left: 0;
+          top: 50%;
+          inline-size: 70%;
+          block-size: 0.75em;
+          border-radius: 0.25em;
+          background-color: rgba($green, 0.5);
+          transform-origin: bottom left;
+          z-index: -1;
+          @include transition-ease;
+        }
+        &:hover,
+        &:focus {
+          color: $white;
+        }
+        &:hover::after,
+        &:focus::after {
+          top: 67%;
+          background-color: $green;
+          transform: scale(1.45, 2.9);
+        }
       }
     }
   }
@@ -197,36 +212,29 @@
   /* CARD SLIDER
 ------------------------------------*/
   .swiperCard {
-    font-size: $fs-card;
-    padding-block-start: 30px;
-    padding-block-end: 30px;
     background: transparent;
     .swiper-slide {
       display: grid;
-      grid-auto-flow: row;
-      grid-auto-rows: 65% 7% 10%;
-      place-items: center;
-      gap: 0.8em;
-      background: $white;
       inline-size: 50%;
       block-size: calc(150px + 10vw);
-      img {
-        display: block;
-        inline-size: 100%;
-        block-size: 100%;
-      }
-      .btn {
-        align-self: flex-start;
-        outline: none;
-        border: none;
-        border-radius: 3px;
-        margin-block-start: 5px;
-        padding: 0.35em;
-        padding-inline-start: 0.5em;
-        padding-inline-end: 0.5em;
-        background-color: darken($body-bg, 10%);
-        color: lighten($red, 20%);
-        cursor: pointer;
+      border-radius: 0.5em;
+      overflow: hidden;
+
+      a {
+        display: inherit;
+        grid-template-rows: 1fr minmax(auto, 4fr);
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        color: $black;
+        h4 {
+          align-self: center;
+        }
+        img {
+          display: block;
+          inline-size: 100%;
+          block-size: 100%;
+        }
       }
     }
   }
@@ -234,49 +242,72 @@
   /* ABOUT
 ------------------------------------*/
   .about {
+    padding: 10vw 0;
     &__wrapper {
-      @extend .wrapper;
-      display: grid;
-      grid-auto-flow: row;
+      @extend .container;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
       justify-content: center;
-      align-items: center;
       padding-block-start: 2rem;
       padding-block-end: 2rem;
-      gap: 1rem;
     }
-    &__img {
-      max-inline-size: 40%;
-      justify-self: center;
-    }
-    &__info {
-      color: lighten($green, 10%);
-      line-height: 1.5;
-      text-align: justify;
-      text-align-last: center;
-    }
-  }
 
-  /* CONTACT
-------------------------------------*/
-  .contact {
-    &__wrapper {
-      @extend .wrapper;
-      display: grid;
-      justify-items: center;
-      gap: 1em;
-      margin: 2em auto 2em;
-      color: lighten($green, 10%);
+    &__info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-block-end: 0.85em;
+      text-align: center;
+      max-width: 60ch;
+      @extend .hide-right;
+      & > * {
+        margin: 0.75em;
+      }
+      &.slide-left {
+        animation: clear 0.5s ease-in forwards;
+      }
       h2 {
-        background-image: linear-gradient(90deg, lighten($red, 20%), $green);
-        background-clip: text;
-        color: transparent;
-        letter-spacing: 0.075em;
-        font-weight: 900;
+        position: relative;
+        text-transform: capitalize;
+        @include underline($red, $white);
       }
       p {
-        line-height: 1.5;
-        text-align: justify;
-        text-align-last: center;
+        color: $white;
+      }
+      blockquote {
+        color: darken($white, 20%);
+        &::before, &::after {
+          content: open-quote;
+          color: $white;
+          font-size: 5vmin;
+          margin-right: 0.25em;
+        }
+        &::after {
+          content: close-quote;
+          margin: 0;
+          margin-left: 0.25em;
+        }
+      }
+
+    }
+    @media (min-width: 40em) {
+      &__wrapper {
+        flex-direction: row;
+        justify-content: center;
+        & > * {
+          flex-basis: 100%;
+        }
+      }
+      &__img {
+        img {
+          inline-size: calc(min(12.5em, 80%));
+        }
+      }
+      &__info {
+        p {
+          line-height: 1.5;
+        }
       }
     }
   }
@@ -284,15 +315,40 @@
   /* FOOTER
 ------------------------------------*/
   .footer {
+    position: relative;
     display: grid;
-    padding-block-start: 2rem;
-    padding-block-end: 2rem;
-    background: $red;
-    color: rgba($white, 0.6);
-    p {
-      text-align: center;
+    justify-content: center;
+    align-items: center;
+    // clip-path: polygon(0 35%, 100% 0, 100% 100%, 0 100%);
+    background: url("../assets/logo_colored.svg") no-repeat,
+      linear-gradient($green, $green);
+    background-size: calc(min(20vw, 140px));
+    background-position: center 0;
+    color: darken($white, 30%);
+    height: calc(min(150px, 20vmin));
+
+    .waves {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 100%;
+      margin-bottom: -1.6vw;
+      fill: $green;
+      z-index: -1;
+    }
+    span {
+      font-size: 0.75rem;
+      margin-top: 7%;
     }
   }
 }
 
+/* ANIMATION MIXINS
+-------------------------------------*/
 @include clear;
+@include fadeIn;
+@include fadeOut;
+@include slideInBounce;
+@include slideOutBounce;
+
+/*-----------------------------------*/

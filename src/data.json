@@ -1,10 +1,5 @@
 {
-  "sliders": [
-    "road-bike.jpeg",
-    "heat_4.jpeg",
-    "cross-bike.jpeg",
-    "heat_2.jpeg"
-  ],
+  "sliders": ["Bikes.png", "heatrers.png", "Third-slide.png"],
   "bicycles": [
     {
       "id": 1,

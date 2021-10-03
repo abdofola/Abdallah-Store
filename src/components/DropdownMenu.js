@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { FaAngleDown } from "react-icons/fa";
 
-function DropdownMenu({ min }) {
+function DropdownMenu({ visible }) {
   const dropDownRef = useRef(null);
   const [isActive, setIsActive] = useState(false);
   const categories = ["bicycles", "heaters"];
@@ -24,7 +24,7 @@ function DropdownMenu({ min }) {
   const style = { transform: isActive ? "rotate(180deg)" : "rotate(0)" };
 
   return (
-    <div className={`menu-container ${min ? "reset-visibility" : ""}`}>
+    <div className={`menu-container ${visible ? "reset-visibility" : ""}`}>
       <button onClick={handleClick} className="menu-trigger">
         <span>Categories</span>
         <FaAngleDown style={style} />
@@ -36,7 +36,7 @@ function DropdownMenu({ min }) {
       >
         <li>
           {categories.map((cat, id) => (
-            <a key={id} href={`#${cat}`}>
+            <a key={id} href={`#${cat}`} onClick={(e)=> e.preventDefault()}>
               {cat}
             </a>
           ))}

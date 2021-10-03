@@ -12,7 +12,6 @@
       position: absolute;
       top: 0;
       right: 0;
-      font-size: $fs-app-header;
       text-decoration: none;
       color: $white;
       background: $green;
@@ -30,10 +29,10 @@
     }
 
     &__txt {
-      padding-inline-start: 10%;
+      // font-size: $fs-app-header;
       inline-size: 100%;
+      padding-inline-start: 5%;
       background: none;
-      font-size: $fs-app-header;
       line-height: 2em;
       @extend .border-input;
       &:focus {
@@ -44,6 +43,16 @@
         opacity: 0.7;
       }
     }
+    @media screen and (min-width: 50em) {
+      &__txt {
+
+        padding: 0.45em 0 0.45em 5%;
+      }
+      &__btn {
+        width: 2.5em;
+      }
+    }
+
   }
   .searchList {
     position: absolute;

@@ -1,69 +1,144 @@
+import React, { useState, useEffect, useRef } from "react";
+import Soical from "./Social";
+import { css } from "@emotion/react";
+import ClipLoader from "react-spinners/ClipLoader";
+
 import { useForm } from "react-hook-form";
+import { useSubmit } from "../custom_hooks/useSubmit";
 import { emailRegex, numRegex } from "../regex";
 
-function Form() {
-  
+export const override = css`
+  font-size: 100%;
+  display: block;
+  margin: 0 auto;
+  border-color: white;
+`;
+
+function Form({ social }) {
+  const msgRef = useRef(null);
+  const [loading, setLoading] = useState(false);
+  // custom hooks
+  const [fetchData, res, err, isPending] = useSubmit(
+    "http://localhost:8000/contact"
+  );
   const {
     register,
     formState: { errors },
     handleSubmit,
+    watch,
+    reset,
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+  const { name, email, phone, message } = watch();
+
+  // side effects to handle response message
+  useEffect(() => {
+    if (!isPending && res) {
+      reset();
+    }
+  }, [res, err, isPending, reset]);
+
+  function onSubmit(data) {
+    setLoading(true);
+    fetchData(data);
+    setTimeout(() => {
+      // msgRef.current.style.opacity = "0";
+    }, 5000);
+  }
 
   return (
-    <form className="form" onSubmit={handleSubmit(onSubmit)}>
-      <label htmlFor="name" type="Name *">
-        <input
-          id="name"
-          type="text"
-          {...register("name", { required: true })}
-          placeholder="Write your name here.."
-        />
-        {errors.name?.type === "required" && (
-          <span>you forgot your name Sr.</span>
+    <>
+      <form className="form" onSubmit={handleSubmit(onSubmit)}>
+        <div className="form__group">
+          <input
+            autoComplete="off"
+            type="text"
+            {...register("name", { required: true })}
+          />
+          <label className={`floating-label ${name ? "input-valid" : ""}`}>
+            name
+          </label>
+          {errors.name?.type === "required" && (
+            <span className="error">you forgot your name Sr.</span>
+          )}
+        </div>
+        <div className="form__group">
+          <input
+            type="text"
+            autoComplete="off"
+            {...register("email", {
+              required: "you forgot your email Sr.",
+              pattern: {
+                value: emailRegex,
+                message: "please enter a valid email Sr.",
+              },
+            })}
+          />
+          <label className={`floating-label ${email ? "input-valid" : ""}`}>
+            email
+          </label>
+          {errors.email?.message && (
+            <span className="error">{errors.email.message}</span>
+          )}
+        </div>
+        <div className="form__group">
+          <input
+            type="tel"
+            autoComplete="off"
+            {...register("phone", {
+              required: "you forgot your phone number Sr.",
+              minLength: { value: 10, message: "less than 10 digits" },
+              maxLength: { value: 14, message: "greater than 14 digits" },
+              pattern: {
+                value: numRegex,
+                message: "please enter a valid phone Sr.",
+              },
+            })}
+          />
+          <label className={`floating-label ${phone ? "input-valid" : ""}`}>
+            phone
+          </label>
+          {errors.phone?.message && (
+            <span className="error">{errors.phone.message}</span>
+          )}
+        </div>
+        <div className="form__group">
+          <textarea {...register("message", { required: true })} />
+          <label
+            className={`floating-label ${message ? "textarea-valid" : ""}`}
+          >
+            message
+          </label>
+          {errors.message?.type === "required" && (
+            <span className="error">you forgot your message Sr.</span>
+          )}
+        </div>
+        <div className="form__group">
+          <button type="submit">
+            {isPending ? (
+              <ClipLoader loading={loading} size={20} css={override} />
+            ) : (
+              "send"
+            )}
+          </button>
+        </div>
+
+        {social && (
+          <div className="form__group">
+            <Soical />
+          </div>
         )}
-      </label>
-      <label htmlFor="email" type="Email *">
-        <input
-          id="email"
-          type="text"
-          placeholder="Let us know how to contact you.."
-          {...register("email", {
-            required: "you forgot your email Sr.",
-            pattern: {
-              value: emailRegex,
-              message: "please enter a valid email Sr.",
-            },
-          })}
-        />
-        {errors.email?.message && <span>{errors.email.message}</span>}
-      </label>
-      <label htmlFor="tel" type="Phone  *">
-        <input
-          id="tel"
-          type="tel"
-          placeholder="Enter Mobile number"
-          {...register("phone", {
-            required: "you forgot your phone number Sr.",
-            minLength: { value: 10, message: "less than 6 digits" },
-            maxLength: { value: 14, message: "grater than 12 digits" },
-            pattern: {
-              value: numRegex,
-              message: "please enter a valid phone Sr.",
-            },
-          })}
-        />
-        {errors.phone?.message && <span>{errors.phone.message}</span>}
-      </label>
-      <label htmlFor="message" type="Message">
-        <textarea
-          placeholder="What would you like to tell us.."
-          {...register("message")}
-        ></textarea>
-      </label>
-      <button type="submit">Submit</button>
-    </form>
+      </form>
+
+      <div
+        className={`response ${
+          !res?.sent ? "response--err" : "response--success"
+        }`}
+        ref={msgRef}
+      >
+        {res?.message}
+      </div>
+    </>
   );
 }
 

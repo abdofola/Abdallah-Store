@@ -1,45 +1,40 @@
 .modalContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba($black, 0.45);
   position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   z-index: 5;
-  background-color: rgba($color: $black, $alpha: 0.35);
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
+  overflow: auto;
   .modal {
-    width: 90vw;
-    height: auto;
-    padding: 1.5em;
-    border-radius: 20px;
-    background-color: rgba($white, 0.35);
+    width: 100vw;
+    padding: 1.5em 0;
+    border-radius: 25px;
+    background-color: rgba($white, 0.65);
     backdrop-filter: blur(1.5em);
-    box-shadow: 0 0 1rem 0 rgba($black, 0.2);
+    box-shadow: 0 0 0.5em 0.25em $black;
 
-    &_header {
+    &__header {
       position: relative;
-      padding-block-end: 1em;
+      margin-block-end: 0.65em;
+      padding-block-end: 0.25em;
       border-bottom: 3px solid $green;
-      &-title {
-        text-align: center;
-      }
-
+      text-align: center;
       .close {
         position: absolute;
-        top: -1.3em;
-        right: -1em;
-        inline-size: 8%;
-        border: none;
+        top: -1em;
+        right: 0.45em;
+        font-size: 130%;
+        cursor: pointer;
         background: transparent;
-
+        border: none;
         svg {
-          width: 100%;
-          height: auto;
-          transition: all 0.3s;
+          // width: 100%;
+          @include transition-ease;
         }
         &:hover {
           svg {
@@ -49,42 +44,23 @@
       }
     }
 
-    &_content {
-      // padding: 2em 0;
-      // border-bottom: 1px solid #dddddd;
-      img {
-        width: 100%;
-        // height: 50%;
-      }
-    }
-
-    &_footer {
-    //   padding: 2rem 0;
-      // padding-block-start: 2em;
-
-      button {
-        float: right;
-        padding: 0.5rem;
-
-        border-radius: 8px;
-      }
-      .modal-close {
-        background-color: transparent;
-        font-weight: 600;
-
-        &:hover {
-          color: rgba(54, 67, 72, 0.8);
-        }
-      }
-      .submit {
-        margin-right: 1rem;
-        color: $white;
-        background-color: $green;
-
-        &:hover {
-          background-color: rgba(54, 67, 72, 0.8);
+    @media screen and (min-width: 500px) {
+      & {
+        width: 65%;
+        padding: 0;
+        padding-bottom: 0.75em;
+        margin: 1em 0;
+        &__header {
+          line-height: 2;
+          .close {
+            width: max-content;
+            font-size: 100%;
+            top: 0.25em;
+            right: 0.25em;
+          }
         }
       }
     }
+    
   }
 }

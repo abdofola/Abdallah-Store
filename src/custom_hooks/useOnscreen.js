@@ -7,21 +7,30 @@ function useOnscreen(ref, options = {}) {
 
   const callback = ([entry]) => {
     // Update the state when callback fires.
-    setIntersecting(entry.isIntersecting);
-    setRatio (entry.intersectionRatio)
+    if (entry.isIntersecting) {
+      setIntersecting(entry.isIntersecting);
+      setRatio(entry.intersectionRatio);
+
+    }
   };
-  
+
+
   useEffect(() => {
     const observer = new IntersectionObserver(callback, options);
     const elem = ref?.current;
 
+    if (!elem) {
+      return;
+    }
+
     observer.observe(elem);
 
-    // cleanup
     return () => observer.unobserve(elem);
-  },[options, ref]);
 
-  return {isIntersecting, ratio};
+    // cleanup
+  }, [options, ref]);
+
+  return { isIntersecting, ratio };
 }
 
 export { useOnscreen };

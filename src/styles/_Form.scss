@@ -1,69 +1,167 @@
+/* UTITLITY CLASSES AND CUSTOM PROPS
+---------------------------------------*/
+.input-valid,
+.textarea-valid {
+  font-size: 0.85rem !important;
+  font-weight: 300 !important;
+  text-shadow: 1px 1px 2px lighten($green, 20%), 0 0 0.1em lighten($green, 10%),
+    0 0 0.1em $green !important;
+  transform: translateY(-200%) !important;
+}
+.textarea-valid {
+  transform: translateY(0) !important;
+}
+$inputBottom: -215%;
+$txtareaBottom: -280%;
+/*------------------------------------*/
+
 .form {
-  position: relative;
   display: flex;
   flex-direction: column;
-  border-radius: 8px;
-  font-family: "Montserrat", sans-serif;
-  label {
-    &::before {
-      content: attr(type);
-      display: block;
-      margin: 28px 0 0;
-    }
+  justify-content: center;
+  align-items: center;
+  inline-size: calc(min(30rem, 90%));
+  margin: 0 auto;
+  background-color: $white;
+  border-radius: 10px;
+  box-shadow: 2px 4px 0.35em currentColor;
+
+  &__group {
+    position: relative;
+    inline-size: calc(min(18.75rem, 100%));
+    padding: 1.25em 0;
     input {
-      width: 100%;
-      margin-block-end: 0.3em;
-      padding: 10px;
-      background: none;
-      outline: none;
-      resize: none;
-      font-size: 1em;
-      border: 0;
-      transition: all 0.3s;
-      border-bottom: 1.5px solid #bebed2;
-      &::-webkit-input-placeholder {
-        color: lighten($black, 30%);
-        overflow: visible;
-      }
+      display: block;
+      position: relative;
+      z-index: 2;
+      inline-size: 100%;
+      padding: 0.85em;
+      color: lighten($black, 20%);
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid darken($white, 20%);
       &:focus {
-        border-bottom: 1px solid $white;
+        outline: none;
+        border-style: hidden;
+        & + label {
+          font-size: calc(min(0.85rem, 75%));
+          font-weight: 300;
+          transform: translateY(-200%);
+          color: $green;
+          &::after {
+            bottom: $inputBottom;
+            inline-size: 100%;
+            opacity: 1;
+            transition: all 0.35s linear 0.17s;
+            transition-property: width, opacity, border-style;
+          }
+        }
       }
     }
+
+    label {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      inline-size: 100%;
+      font-size: calc(min(1rem, 95%));
+      font-weight: 100;
+      color: lighten($black, 30%);
+      pointer-events: none;
+      transform: translateY(-50%);
+      // @include transition-ease;
+      transition: all 0.3s linear;
+
+      &.input-valid,
+      &.textarea-valid {
+        color: $green;
+        &::after {
+          bottom: $inputBottom;
+        }
+      }
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: -50%;
+        left: 0;
+        inline-size: 10%;
+        block-size: 2px;
+        opacity: 0;
+        background-color: $green;
+      }
+    }
+
     textarea {
       @extend input;
-      font-family: inherit;
+      padding: 0;
+      margin-block-start: 1px;
+      resize: none;
+      & + label {
+        top: 0;
+        transform: translateY(100%);
+        &::after {
+          bottom: -120%;
+        }
+        &.textarea-valid {
+          &::after {
+            bottom: $txtareaBottom;
+          }
+        }
+      }
+      &:focus {
+        & + label {
+          color: $green;
+          transform: translateY(0);
+          &::after {
+            bottom: $txtareaBottom;
+          }
+        }
+      }
     }
-    span {
-      color: lighten($red, 15%);
+    .error {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      color: $red;
+      font-size: calc(min(0.85rem, 100%));
+    }
+
+    &:nth-child(5) {
+      display: flex;
+      justify-content: center;
+      button {
+        display: inline-block;
+        padding: 0.5em 1.5em;
+        cursor: pointer;
+        text-transform: uppercase;
+        letter-spacing: 0.25em;
+        color: $white;
+        background-color: $green;
+        border: none;
+        font-size: 0.85rem;
+        @include transition-ease;
+        &:hover,
+        &:focus {
+          opacity: 0.8;
+        }
+      }
+    }
+
+    &:last-child {
+      display: flex;
+      justify-content: center;
     }
   }
-  button {
-    block-size: 2em;
-    margin-block-start: 2em;
-    border: 1px solid $green;
-    color: $white;
-    background: rgba($green, 0.8);
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.3s;
-    &:hover {
-      background: #78788c;
-      color: $white;
-    }
+}
+
+.response {
+  text-align: center;
+  margin-block-start: 0.5em;
+  @include transition-ease;
+  &--err {
+    color: $red;
   }
-  div {
-    position: absolute;
-    bottom: -4.5em;
-    right: 0em;
-    background: #50505a;
-    color: #fff;
-    width: 100%;
-    padding: 16px 4px 16px 0;
-    border-radius: 6px;
-    font-size: 13px;
-    box-shadow: 10px 10px 40px -14px #000;
-    span {
-      margin: 0 5px 0 15px;
-    }
+  &--success {
+    color: $green;
   }
 }
