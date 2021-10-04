@@ -11,7 +11,7 @@ import logo from "../logos/logo_trans.svg";
 const ProductDetail = () => {
   const [form, setForm] = useState(false);
   const { id } = useParams();
-  const url = "http://localhost:8000/products?id=" + id;
+  const url = "https://momo-japan-market.com/product?id=" + id;
   const { data: product, isPending, error } = useFetch(url);
   const override = css`
     display: block;

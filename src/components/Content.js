@@ -10,7 +10,7 @@ import { css } from "@emotion/react";
 import ClipLoader from "react-spinners/ClipLoader";
 
 function Content() {
-  const url = "http://localhost:8000";
+  const url = "https://momo-japan-market.com/products";
   const initState = {
     showAll: true,
     showBicycle: false,
