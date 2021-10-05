@@ -10,7 +10,7 @@ function Search() {
   const [searchProps, resetSearch] = useInput("");
   const [searchResult, setSearchResult] = useState([]);
   const [change, setChange] = useState(false);
-  const { data: products } = useFetch("http://localhost:8000/");
+  const { data: products } = useFetch("https://momo-japan-market.com/products/");
   
 
   // Return array of matching names : string

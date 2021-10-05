@@ -15,12 +15,11 @@ export const override = css`
 `;
 
 function Form({ social }) {
+  const url = "https://momo-japan-market.com/contact";
   const msgRef = useRef(null);
   const [loading, setLoading] = useState(false);
   // custom hooks
-  const [fetchData, res, err, isPending] = useSubmit(
-    "http://localhost:8000/contact"
-  );
+  const [fetchData, res, err, isPending] = useSubmit(url);
   const {
     register,
     formState: { errors },
@@ -42,7 +41,7 @@ function Form({ social }) {
     setLoading(true);
     fetchData(data);
     setTimeout(() => {
-      // msgRef.current.style.opacity = "0";
+      msgRef.current.style.opacity = "0";
     }, 5000);
   }
 
