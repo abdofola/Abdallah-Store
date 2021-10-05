@@ -277,7 +277,8 @@
       }
       blockquote {
         color: darken($white, 20%);
-        &::before, &::after {
+        &::before,
+        &::after {
           content: open-quote;
           color: $white;
           font-size: 5vmin;
@@ -289,7 +290,6 @@
           margin-left: 0.25em;
         }
       }
-
     }
     @media (min-width: 40em) {
       &__wrapper {
@@ -321,7 +321,7 @@
     align-items: center;
     // clip-path: polygon(0 35%, 100% 0, 100% 100%, 0 100%);
     background: url("../assets/logo_colored.svg") no-repeat,
-      linear-gradient($green, $green);
+      linear-gradient(0deg, darken($green, 20%), lighten($green, 15%));
     background-size: calc(min(20vw, 140px));
     background-position: center 0;
     color: darken($white, 30%);
