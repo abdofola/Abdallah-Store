@@ -3,7 +3,7 @@
   .top {
     position: relative;
     height: calc(min(18vw, 100px));
-    background-color: rgba($green, 0.8);
+    background-color: darken($green, 20%);
     &__logo {
       width: calc(min(120px, 20vw));
       position: absolute;
@@ -43,7 +43,7 @@
       right: 0;
       top: 100%;
       z-index: -1;
-      background-color: rgba($green, 0.8);
+      background-color: darken($green, 20%);
       fill: $white;
       svg {
         width: 100%;
