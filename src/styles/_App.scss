@@ -333,7 +333,7 @@
       right: 0;
       bottom: 100%;
       margin-bottom: -1.6vw;
-      fill: $green;
+      fill: lighten($green,15%);
       z-index: -1;
     }
     span {
