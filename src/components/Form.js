@@ -40,9 +40,10 @@ function Form({ social }) {
   function onSubmit(data) {
     setLoading(true);
     fetchData(data);
-    setTimeout(() => {
-      msgRef.current.style.opacity = "0";
-    }, 5000);
+    !loading &&
+      setTimeout(() => {
+        msgRef.current.style.opacity = "0";
+      }, 10000);
   }
 
   return (
@@ -120,6 +121,14 @@ function Form({ social }) {
               "send"
             )}
           </button>
+          <div
+            className={`response ${
+              res?.sent ? "response--success" : "response--err"
+            }`}
+            ref={msgRef}
+          >
+            {res?.message}
+          </div>
         </div>
 
         {social && (
@@ -128,15 +137,6 @@ function Form({ social }) {
           </div>
         )}
       </form>
-
-      <div
-        className={`response ${
-          !res?.sent ? "response--err" : "response--success"
-        }`}
-        ref={msgRef}
-      >
-        {res?.message}
-      </div>
     </>
   );
 }
