@@ -6,11 +6,12 @@ import useInput from "../custom_hooks/useInput";
 
 
 function Search() {
+  const url = "https://api.momo-japan-market.com/products/";
   const ref = useRef(null);
   const [searchProps, resetSearch] = useInput("");
   const [searchResult, setSearchResult] = useState([]);
   const [change, setChange] = useState(false);
-  const { data: products } = useFetch("https://momo-japan-market.com/products/");
+  const { data: products } = useFetch(url);
   
 
   // Return array of matching names : string

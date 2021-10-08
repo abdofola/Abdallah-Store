@@ -15,7 +15,7 @@ export const override = css`
 `;
 
 function Form({ social }) {
-  const url = "https://momo-japan-market.com/contact";
+  const url = "https://api.momo-japan-market.com/contact";
   const msgRef = useRef(null);
   const [loading, setLoading] = useState(false);
   // custom hooks
